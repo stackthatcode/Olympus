@@ -1,2 +1,2 @@
-# scarlet
+# Scarlet
 "The Scarlet Letter"
