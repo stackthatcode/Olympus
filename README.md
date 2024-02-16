@@ -1,2 +1,2 @@
-# Scarlet
-"The Scarlet Letter"
+# Olympus
+"Olympus"
