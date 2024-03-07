@@ -1,0 +1,198 @@
+﻿@Model DCT.Middle.Email.Content.Message
+@using RazorEngine.Templating
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>@Model.CompanyName - System Email</title>
+
+    <style type="text/css">
+        img {
+            max-width: 100%;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: none;
+            background-color: #f6f6f6;
+            width: 100% !important;
+            line-height: 1.6em;
+            height: 100%;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        @@media only screen and ( max-width: 640px ) {
+            body {
+                padding: 0 !important;
+            }
+
+            h1 {
+                font-weight: 800 !important;
+                margin: 20px 0 5px !important;
+            }
+
+            h2 {
+                font-weight: 800 !important;
+                margin: 20px 0 5px !important;
+            }
+
+            h3 {
+                font-weight: 800 !important;
+                margin: 20px 0 5px !important;
+            }
+
+            h4 {
+                font-weight: 800 !important;
+                margin: 20px 0 5px !important;
+            }
+
+            h1 {
+                font-size: 22px !important;
+            }
+
+            h2 {
+                font-size: 18px !important;
+            }
+
+            h3 {
+                font-size: 16px !important;
+            }
+
+            .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            .content {
+                padding: 0 !important;
+            }
+
+            .content-wrap {
+                padding: 10px !important;
+            }
+
+            .invoice {
+                width: 100% !important;
+            }
+        }
+
+        /* Quill.js - rich text editor - font-families */
+
+        .ql-font-verdana {
+            font-family: "Verdana" !important;
+        }
+
+        .ql-font-arial {
+            font-family: "Arial" !important;
+        }
+
+        .ql-font-times-new-roman {
+            font-family: "Times New Roman" !important;
+        }
+
+        .ql-font-century-gothic {
+            font-family: century-gothic, sans-serif;
+        }
+    </style>
+</head>
+
+<body itemscope="itemscope" itemtype="http://schema.org/EmailMessage"
+      style="box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
+
+    <table class="body-wrap" style="box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
+        <tr style="box-sizing: border-box; font-size: 14px; margin: 0;">
+           
+            <td class="container" width="600" style="box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">
+                <div class="content" style="box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
+                    <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope=itemscope itemtype="http://schema.org/ConfirmAction" style="box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff">
+                        <tr style="box-sizing: border-box; font-size: 14px; margin: 0;">
+                            <td class="content-wrap" 
+                                valign="top" 
+                                style="box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;">
+                                <meta itemprop="name" 
+                                      content="Confirm Email" 
+                                      style="box-sizing: border-box; font-size: 14px; margin: 0; min-height: 250px;" />
+
+                                <table width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-size: 14px; margin: 0;">
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <a border="0" href="@Model.WebsiteUrl">
+                                                @if (ViewBag.UseEmbeddedImages)
+                                                {
+                                                    <img width="130" src="cid:@Model.Logo.ImageName" />
+                                                }
+                                                else
+                                                {
+                                                    <img width="130" src="@Model.Logo.ImageName" />
+                                                }
+                                            </a>
+
+                                            <a border="0" href="@Model.CompanyWebsiteUrl">
+                                                <img width="130"
+                                                     src="@Model.CompanyLogoUrl"
+                                                     alt="@Model.CompanyName"
+                                                     title="@Model.CompanyName" />
+                                            </a>
+
+                                            <h3>
+                                                @Model.CompanyName
+                                            </h3>
+                                        </td>
+                                    </tr>
+
+                                    @foreach (var contentBlock in Model.ContentBlocks)
+                                    {
+                                    <tr style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                        @if (contentBlock is HtmlBlock)
+                                        {
+                                            var htmlBlock = contentBlock as HtmlBlock;
+                                            <td class="content-block" valign="top">
+                                                    <div style="max-width:516px; word-wrap: break-word;">
+                                                    @Raw(htmlBlock.Content)
+                                                </div>
+                                            </td>
+                                        }
+
+                                        @if (contentBlock is ActionBlock)
+                                        {
+                                            var actionBlock = contentBlock as ActionBlock;
+
+                                            <td class="content-block" style="text-align: center;" itemprop="handler" itemscope=itemscope itemtype="http://schema.org/HttpActionHandler" style="box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                <a href="@actionBlock.Url"
+                                                   class="btn-primary" itemprop="url"
+                                                   target="_blank"
+                                                   style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">
+                                                    @Raw(actionBlock.ButtonText)
+                                                </a>
+                                            </td>
+                                        }
+                                    </tr>
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="footer" style="box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;">
+                        <table width="100%" style="box-sizing: border-box; font-size: 14px; margin: 0;">
+                            <tr style="box-sizing: border-box; font-size: 14px; margin: 0;">
+                                <td class="aligncenter content-block" style="font-weight: 600; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">
+                                    Visit <a target="_blank" href="@Model.CompanyWebsiteUrl">@Model.CompanyWebsiteUrl</a> for more information.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

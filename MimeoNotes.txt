@@ -1,0 +1,23 @@
+
+Random Note Stream
+=+==+==+==+==+==+=
+
+
+Middle (class library)
+``````````````````````
+- BrokerAppSettings
+- 
+
+
+
+Communications (class library)
+``````````````````````````````
+- Read
+
+
+
+### We need a bit of glue to enable injecting Comm library to the Middle library
+	- Right now, the static ReadConfig() method is coupled to the Middle library's BrokerAppSettings object
+		o Thanks for the code contribution, Mr. Non-Paying Client
+
+
